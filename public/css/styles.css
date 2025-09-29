@@ -1,0 +1,198 @@
+/* Colores principales */
+:root {
+  --violeta-claro: #6B3978;
+  --violeta-oscuro: #893C82;
+  --texto: #fff;
+  --fondo: #f5f5f5;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+  background-color: var(--fondo);
+  color: #333;
+}
+
+/* Header y navbar */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* navbar centrado */
+  background: linear-gradient(90deg, var(--violeta-claro), var(--violeta-oscuro));
+  padding: 0 20px;
+  height: 85px; /* altura del header */
+  color: var(--texto);
+  position: relative;
+}
+
+/* Logos */
+.logo-izq, .logo-der {
+  width: 100px;   /* ancho fijo */
+  height: auto;
+  position: absolute;
+  top: 10px;
+}
+
+.logo-izq { left: 10px; }
+.logo-der { right: 10px; }
+
+/* Navbar centrado */
+header nav {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+header nav a {
+  color: var(--texto);
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+header nav a:hover,
+header nav a.active {
+  text-decoration: underline;
+}
+
+/* Main */
+main {
+  max-width: 1000px;
+  margin: 20px auto 20px;
+  padding: 20px;
+}
+
+/* Cards */
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Productos */
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.producto {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.producto:hover {
+  transform: translateY(-5px);
+}
+
+/* Botones */
+button {
+  background: var(--violeta-oscuro);
+  color: var(--texto);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: var(--violeta-claro);
+}
+
+/* Formularios */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea, select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Chat */
+.chat-container {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+/* Contenedor login */
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--violeta-oscuro);
+}
+
+.login-container input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.login-container button {
+  padding: 10px;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .logo-izq, .logo-der {
+    width: 80px;
+    top: 10px;
+  }
+
+  nav {
+    margin-top: 10px;
+  }
+
+  main {
+    margin: 20px 10px 20px;
+  }
+
+  .login-container {
+    margin: 50px 10px;
+    padding: 20px;
+  }
+}

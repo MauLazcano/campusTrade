@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusTrade - Publicar artículo</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script defer src="../js/publicar.js"></script>
+</head>
+<body>
+  <header>
+    <img src="../assets/img/campustrade-logo.png" class="logo-izq">
+    <img src="../assets/img/upmh.png" class="logo-der">
+    <nav class="navbar">
+      <a href="inicio.html">Inicio</a>
+      <a href="compra.html">Compra</a>
+      <a href="recientes.html">Recientes</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="trueque.html">Trueque</a>
+      <a href="chats.html">Chats</a>
+      <a href="publicar.html">Publicar</a>
+      <a href="cuenta.html">Cuenta</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Publicar nuevo artículo</h1>
+    <form id="form-publicar">
+      <input type="text" name="titulo" placeholder="Título" required>
+      <textarea name="descripcion" placeholder="Descripción" required></textarea>
+      <input type="text" name="categoria" placeholder="Categoría" required>
+      <select name="tipo">
+        <option value="venta">Venta</option>
+        <option value="trueque">Trueque</option>
+      </select>
+      <input type="number" name="precio" placeholder="Precio (si aplica)">
+      <button type="submit">Publicar</button>
+    </form>
+  </main>
+  <script src="../js/publicar.js"></script>
+</body>
+</html>
