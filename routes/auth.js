@@ -5,7 +5,7 @@ import pool from "../db.js";
 const router = express.Router();
 
 /**
- * POST /login
+ * POST /api/auth/login
  * Body: { email, contrasenia }
  */
 router.post("/login", async (req, res) => {
@@ -16,8 +16,10 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "Email y contraseña son requeridos" });
     }
 
+    // ⚠️ NOTA: lo correcto es comparar contraseñas con bcrypt,
+    // pero por ahora hacemos comparación directa (como en tu script)
     const [rows] = await pool.query(
-      "SELECT idUsuario, nombre, apellidoP, apellidoM, rol FROM usuario WHERE email = ? AND contrasenia = ?",
+      "SELECT id_usuario, nombre, correo_institucional, es_vendedor FROM usuarios WHERE correo_institucional = ? AND password_hash = ?",
       [email, contrasenia]
     );
 
@@ -30,11 +32,10 @@ router.post("/login", async (req, res) => {
     res.json({
       message: "Login exitoso",
       user: {
-        id: user.idUsuario,
+        id: user.id_usuario,
         nombre: user.nombre,
-        apellidoP: user.apellidoP,
-        apellidoM: user.apellidoM,
-        rol: user.rol, // 0=Gerente, 1=Ejecutivo, 2=Cliente
+        correo: user.correo_institucional,
+        es_vendedor: user.es_vendedor
       },
     });
   } catch (err) {
