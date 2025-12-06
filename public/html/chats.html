@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusTrade - Chats</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header>
+    <img src="../assets/img/campustrade-logo.png" class="logo-izq" alt="CampusTrade">
+    <nav>
+      <a href="inicio.html">Inicio</a>
+      <a href="compra.html">Compra</a>
+      <a href="recientes.html">Recientes</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="trueque.html">Trueque</a>
+      <a href="chats.html" class="active">Chats</a>
+      <a href="publicar.html">Publicar</a>
+      <a href="cuenta.html">Cuenta</a>
+    </nav>
+    <img src="../assets/img/upmh.png" class="logo-der" alt="UPMH">
+  </header>
+
+  <main>
+    <h1 class="hero-section">Mis Chats</h1>
+    <div class="chat-layout">
+      <!-- Panel de contactos -->
+      <div class="contactos-panel">
+        <div class="contactos-header">
+          <h2>Mensajes</h2>
+          <div class="search-box">
+            <input type="text" id="buscar-contacto" placeholder="Buscar conversaciones...">
+          </div>
+        </div>
+        <div class="contactos-lista" id="contactos-lista">
+          <!-- Los contactos se generarán dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Panel de chat -->
+      <div class="chat-panel">
+        <div id="chat-vacio" class="chat-vacio">
+          <div class="chat-vacio-icon">💬</div>
+          <h3>Selecciona una conversación</h3>
+          <p>Elige un contacto de la lista para comenzar a chatear</p>
+        </div>
+
+        <div id="chat-activo" style="display: none; height: 100%; flex-direction: column;">
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="chat-header-avatar" id="chat-avatar">MA</div>
+              <div class="chat-header-texto">
+                <h2 id="chat-nombre">María Acosta</h2>
+                <div class="chat-header-status" id="chat-status">En línea</div>
+              </div>
+            </div>
+            <div class="chat-acciones">
+              <button onclick="verPerfil()">Ver perfil</button>
+            </div>
+          </div>
+
+          <div class="chat-mensajes" id="chat-mensajes">
+            <!-- Los mensajes se generarán aquí -->
+          </div>
+
+          <div class="chat-input-wrapper">
+            <form id="form-chat">
+              <input type="text" id="mensaje" placeholder="Escribe un mensaje..." required autocomplete="off">
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Datos de ejemplo de contactos
+    const contactosData = [
+      {
+        id: 1,
+        nombre: "María Acosta",
+        iniciales: "MA",
+        ultimoMensaje: "¿Todavía tienes la calculadora disponible?",
+        tiempo: "10:30",
+        online: true,
+        noLeidos: 2
+      },
+      {
+        id: 2,
+        nombre: "Carlos Hernández",
+        iniciales: "CH",
+        ultimoMensaje: "Perfecto, nos vemos mañana",
+        tiempo: "Ayer",
+        online: false,
+        noLeidos: 0
+      },
+      {
+        id: 3,
+        nombre: "Ana Martínez",
+        iniciales: "AM",
+        ultimoMensaje: "¿Aceptas trueque por un libro de física?",
+        tiempo: "Ayer",
+        online: true,
+        noLeidos: 1
+      },
+      {
+        id: 4,
+        nombre: "Luis García",
+        iniciales: "LG",
+        ultimoMensaje: "Gracias por la mochila, está en perfectas condiciones",
+        tiempo: "Mar 3",
+        online: false,
+        noLeidos: 0
+      },
+      {
+        id: 5,
+        nombre: "Sofia Ramírez",
+        iniciales: "SR",
+        ultimoMensaje: "¿Cuánto pides por la laptop?",
+        tiempo: "Mar 2",
+        online: true,
+        noLeidos: 0
+      }
+    ];
+
+    // Mensajes de ejemplo
+    const mensajesData = {
+      1: [
+        { texto: "Hola, vi tu publicación de la calculadora científica", enviado: false, hora: "10:15" },
+        { texto: "¡Hola! Sí, aún está disponible", enviado: true, hora: "10:20" },
+        { texto: "¿Todavía tienes la calculadora disponible?", enviado: false, hora: "10:30" }
+      ],
+      2: [
+        { texto: "¿Podemos vernos mañana en la cafetería?", enviado: true, hora: "Ayer 15:30" },
+        { texto: "Perfecto, nos vemos mañana", enviado: false, hora: "Ayer 15:45" }
+      ],
+      3: [
+        { texto: "Me interesa tu mochila", enviado: false, hora: "Ayer 12:00" },
+        { texto: "¿Aceptas trueque por un libro de física?", enviado: false, hora: "Ayer 12:05" }
+      ]
+    };
+
+    let contactoActual = null;
+    const contactosLista = document.getElementById('contactos-lista');
+    const chatVacio = document.getElementById('chat-vacio');
+    const chatActivo = document.getElementById('chat-activo');
+    const chatMensajes = document.getElementById('chat-mensajes');
+    const formChat = document.getElementById('form-chat');
+    const inputMensaje = document.getElementById('mensaje');
+    const buscarContacto = document.getElementById('buscar-contacto');
+
+    // Renderizar contactos
+    function renderizarContactos(filtro = '') {
+      contactosLista.innerHTML = '';
+      const contactosFiltrados = contactosData.filter(c => 
+        c.nombre.toLowerCase().includes(filtro.toLowerCase())
+      );
+
+      contactosFiltrados.forEach(contacto => {
+        const div = document.createElement('div');
+        div.className = `contacto-item ${contactoActual === contacto.id ? 'active' : ''}`;
+        div.onclick = () => seleccionarContacto(contacto.id);
+        
+        div.innerHTML = `
+          <div class="contacto-avatar">
+            ${contacto.iniciales}
+            <span class="status-indicator ${contacto.online ? '' : 'offline'}"></span>
+          </div>
+          <div class="contacto-info">
+            <div class="contacto-nombre">
+              <span>${contacto.nombre}</span>
+              <span class="contacto-tiempo">${contacto.tiempo}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div class="contacto-ultimo-mensaje">${contacto.ultimoMensaje}</div>
+              ${contacto.noLeidos > 0 ? `<span class="mensaje-no-leido">${contacto.noLeidos}</span>` : ''}
+            </div>
+          </div>
+        `;
+        
+        contactosLista.appendChild(div);
+      });
+    }
+
+    // Seleccionar contacto
+    function seleccionarContacto(id) {
+      contactoActual = id;
+      const contacto = contactosData.find(c => c.id === id);
+      
+      // Actualizar header del chat
+      document.getElementById('chat-avatar').textContent = contacto.iniciales;
+      document.getElementById('chat-nombre').textContent = contacto.nombre;
+      document.getElementById('chat-status').textContent = contacto.online ? 'En línea' : 'Desconectado';
+      
+      // Mostrar chat activo
+      chatVacio.style.display = 'none';
+      chatActivo.style.display = 'flex';
+      
+      // Renderizar mensajes
+      renderizarMensajes(id);
+      
+      // Actualizar lista de contactos
+      renderizarContactos();
+      
+      // Marcar como leído
+      contacto.noLeidos = 0;
+    }
+
+    // Renderizar mensajes
+    function renderizarMensajes(contactoId) {
+      chatMensajes.innerHTML = '';
+      const mensajes = mensajesData[contactoId] || [];
+      
+      mensajes.forEach(msg => {
+        agregarMensaje(msg.texto, msg.enviado, msg.hora);
+      });
+    }
+
+    // Agregar mensaje
+    function agregarMensaje(texto, enviado = false, hora = null) {
+      if (!hora) {
+        const ahora = new Date();
+        hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+      }
+      
+      const contacto = contactosData.find(c => c.id === contactoActual);
+      const mensajeDiv = document.createElement('div');
+      mensajeDiv.className = `mensaje ${enviado ? 'enviado' : 'recibido'}`;
+      
+      mensajeDiv.innerHTML = `
+        <div class="mensaje-avatar">${enviado ? 'TÚ' : contacto.iniciales}</div>
+        <div class="mensaje-contenido">
+          <div class="mensaje-bubble">${texto}</div>
+          <div class="mensaje-tiempo">${hora}</div>
+        </div>
+      `;
+      
+      chatMensajes.appendChild(mensajeDiv);
+      chatMensajes.scrollTop = chatMensajes.scrollHeight;
+    }
+
+    // Enviar mensaje
+    formChat.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const mensaje = inputMensaje.value.trim();
+      if (!mensaje || !contactoActual) return;
+      
+      // Agregar mensaje enviado
+      agregarMensaje(mensaje, true);
+      
+      // Guardar en datos
+      if (!mensajesData[contactoActual]) {
+        mensajesData[contactoActual] = [];
+      }
+      mensajesData[contactoActual].push({
+        texto: mensaje,
+        enviado: true,
+        hora: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })
+      });
+      
+      // Actualizar último mensaje en la lista
+      const contacto = contactosData.find(c => c.id === contactoActual);
+      contacto.ultimoMensaje = mensaje;
+      contacto.tiempo = "Ahora";
+      
+      inputMensaje.value = '';
+      renderizarContactos();
+      
+      // Simular respuesta automática después de 2 segundos
+      setTimeout(() => {
+        const respuestas = [
+          "Claro, ¿cuándo podemos vernos?",
+          "Perfecto, te envío mi ubicación",
+          "¿Aceptas pago en efectivo?",
+          "Me parece bien, quedamos así",
+          "Gracias por responder tan rápido"
+        ];
+        const respuesta = respuestas[Math.floor(Math.random() * respuestas.length)];
+        agregarMensaje(respuesta, false);
+        
+        mensajesData[contactoActual].push({
+          texto: respuesta,
+          enviado: false,
+          hora: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' })
+        });
+        
+        contacto.ultimoMensaje = respuesta;
+        renderizarContactos();
+      }, 2000);
+    });
+
+    // Buscar contactos
+    buscarContacto.addEventListener('input', (e) => {
+      renderizarContactos(e.target.value);
+    });
+
+    // Ver perfil
+    function verPerfil() {
+      alert('Funcionalidad de perfil - En desarrollo');
+    }
+
+    // Inicializar
+    renderizarContactos();
+  </script>
+</body>
+</html>

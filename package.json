@@ -1,0 +1,23 @@
+{
+  "name": "campustrade",
+  "version": "1.0.0",
+  "description": "App referente a la asignatura de \"Desarrollo de negocios pata tecnologías de la información\"",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-personal:MauLAzcano/campusTrade.git"
+  },
+  "license": "ISC",
+  "author": "Mauro Lazcano, Andrea Perez, Hanna Fernandez, Sofia Mar, Daniela Flores",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.1"
+  }
+}

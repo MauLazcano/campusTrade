@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusTrade - Trueque</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<header>
+  <img src="../assets/img/campustrade-logo.png" class="logo-izq" alt="CampusTrade">
+  <nav>
+    <a href="inicio.html">Inicio</a>
+    <a href="compra.html">Compra</a>
+    <a href="recientes.html">Recientes</a>
+    <a href="categorias.html">Categorías</a>
+    <a href="trueque.html" class="active">Trueque</a>
+    <a href="chats.html">Chats</a>
+    <a href="publicar.html">Publicar</a>
+    <a href="cuenta.html">Cuenta</a>
+  </nav>
+  <img src="../assets/img/upmh.png" class="logo-der" alt="UPMH">
+</header>
+
+<main>
+
+  <section class="hero-section">
+    <h1>Artículos para trueque</h1>
+    <p>Intercambia productos con otros estudiantes</p>
+  </section>
+
+  <div class="productos">
+
+    <!-- BICICLETA -->
+    <div class="producto">
+      <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+        <img src="../assets/img/contenedores.png" class="img-producto" alt="Bicicleta">
+        <span class="producto-badge trueque">Trueque</span>
+      </div>
+
+      <div class="producto-info">
+        <div class="producto-categoria">Hogar</div>
+        <div class="producto-titulo">Set de contenedores para comida</div>
+        <div class="producto-footer">
+          <div class="producto-precio">trueque</div>
+          <button>Intercambiar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIBROS -->
+    <div class="producto">
+      <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+        <img src="../assets/img/Libro.jpg" class="img-producto" alt="Libros">
+        <span class="producto-badge trueque">Trueque</span>
+      </div>
+
+      <div class="producto-info">
+        <div class="producto-categoria">Educación</div>
+        <div class="producto-titulo">Libro de Cálculo Diferencial - 3ra Ed.</div>
+        <div class="producto-footer">
+          <div class="producto-precio">trueque</div>
+          <button>Intercambiar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="../js/trueque.js"></script>
+<script>
+  document.querySelectorAll('.producto').forEach(producto => {
+    producto.addEventListener('click', () => {
+      console.log('Producto de trueque seleccionado');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusTrade - Compra</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<header>
+  <img src="../assets/img/campustrade-logo.png" class="logo-izq" alt="CampusTrade">
+  <nav>
+    <a href="inicio.html">Inicio</a>
+    <a href="compra.html" class="active">Compra</a>
+    <a href="recientes.html">Recientes</a>
+    <a href="categorias.html">Categorías</a>
+    <a href="trueque.html">Trueque</a>
+    <a href="chats.html">Chats</a>
+    <a href="publicar.html">Publicar</a>
+    <a href="cuenta.html">Cuenta</a>
+  </nav>
+  <img src="../assets/img/upmh.png" class="logo-der" alt="UPMH">
+</header>
+
+<main>
+
+  <section class="hero-section">
+    <h1>Artículos en venta</h1>
+    <p>Compra productos ofrecidos por otros estudiantes</p>
+  </section>
+
+  <div class="productos">
+
+    <!-- CALCULADORA -->
+    <div class="producto">
+      <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+        <img src="../assets/img/Calculadora.jpg" class="img-producto" alt="Calculadora">
+        <span class="producto-badge">Venta</span>
+      </div>
+      <div class="producto-info">
+        <div class="producto-categoria">Electrónica</div>
+        <div class="producto-titulo">Calculadora científica Casio FX-991</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$350</div>
+          <button>Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOCHILA -->
+    <div class="producto">
+      <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+        <img src="../assets/img/mochila.png" class="img-producto" alt="Mochila">
+        <span class="producto-badge">Venta</span>
+      </div>
+      <div class="producto-info">
+        <div class="producto-categoria">Accesorios</div>
+        <div class="producto-titulo">Mochila Jansport Original - Azul</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$500</div>
+          <button>Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAPTOP -->
+    <div class="producto">
+      <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+        <img src="../assets/img/laptop.png" class="img-producto" alt="Laptop">
+        <span class="producto-badge">Venta</span>
+      </div>
+      <div class="producto-info">
+        <div class="producto-categoria">Electrónica</div>
+        <div class="producto-titulo">Laptop HP Core i5 - 8GB RAM</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$8,500</div>
+          <button>Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUDADERA -->
+    <div class="producto">
+      <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+        <img src="../assets/img/sudadera.png" class="img-producto" alt="Sudadera">
+        <span class="producto-badge">Venta</span>
+      </div>
+      <div class="producto-info">
+        <div class="producto-categoria">Ropa</div>
+        <div class="producto-titulo">Sudadera Universidad - Talla M</div>
+        <div class="producto-footer">
+          <div class="producto-precio">$300</div>
+          <button>Comprar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script src="../js/compra.js"></script>
+<script>
+  document.querySelectorAll('.producto').forEach(producto => {
+    producto.addEventListener('click', () => {
+      console.log('Producto en venta seleccionado');
+    });
+  });
+</script>
+
+</body>
+</html>

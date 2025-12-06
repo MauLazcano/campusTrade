@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusTrade - Inicio</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header>
+    <img src="../assets/img/campustrade-logo.png" class="logo-izq" alt="CampusTrade">
+    <nav>
+      <a href="inicio.html" class="active">Inicio</a>
+      <a href="compra.html">Compra</a>
+      <a href="recientes.html">Recientes</a>
+      <a href="categorias.html">Categorías</a>
+      <a href="trueque.html">Trueque</a>
+      <a href="chats.html">Chats</a>
+      <a href="publicar.html">Publicar</a>
+      <a href="cuenta.html">Cuenta</a>
+    </nav>
+    <img src="../assets/img/upmh.png" class="logo-der" alt="UPMH">
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <h1>Bienvenido a CampusTrade</h1>
+      <p>Compra, vende e intercambia con tu comunidad universitaria</p>
+    </section>
+
+    <div class="section-header">
+      <h2>Últimas Publicaciones</h2>
+      <a href="recientes.html" class="view-all">Ver todas →</a>
+    </div>
+
+    <div class="productos">
+      <div class="producto">
+        <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);" height="10">
+          <img src="../assets/img/Calculadora.jpg" alt="Calculadora" class="img-producto">
+          <span class="producto-badge">Venta</span>
+        </div>
+        <div class="producto-info">
+          <div class="producto-categoria">Electrónica</div>
+          <div class="producto-titulo">Calculadora científica Casio FX-991</div>
+          <div class="producto-footer">
+            <div class="producto-precio">$350</div>
+            <div class="producto-rating">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto">
+        <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+          <img src="../assets/img/Libro.jpg" alt="Libro de Cálculo" class="img-producto">
+          <span class="producto-badge trueque">Trueque</span>
+        </div>
+        <div class="producto-info">
+          <div class="producto-categoria">Libros</div>
+          <div class="producto-titulo">Libro de Cálculo Diferencial - 3ra Ed.</div>
+          <div class="producto-footer">
+            <div class="producto-precio" style="color: #4CAF50;">Trueque</div>
+            <div class="producto-rating">
+              ★★★★☆
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto">
+        <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+          <img src="../assets/img/mochila.png" alt="Mochila" class="img-producto">
+          <span class="producto-badge">Venta</span>
+        </div>
+        <div class="producto-info">
+          <div class="producto-categoria">Accesorios</div>
+          <div class="producto-titulo">Mochila Jansport Original - Azul</div>
+          <div class="producto-footer">
+            <div class="producto-precio">$500</div>
+            <div class="producto-rating">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto">
+        <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+          <img src="../assets/img/laptop.png" alt="Laptop" class="img-producto">
+          <span class="producto-badge">Venta</span>
+        </div>
+        <div class="producto-info">
+          <div class="producto-categoria">Electrónica</div>
+          <div class="producto-titulo">Laptop HP Core i5 - 8GB RAM</div>
+          <div class="producto-footer">
+            <div class="producto-precio">$8,500</div>
+            <div class="producto-rating">
+              ★★★★☆
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto">
+        <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+          <img src="../assets/img/sudadera.png" alt="Sudadera" class="img-producto">
+          <span class="producto-badge">Venta</span>
+        </div>
+        <div class="producto-info">
+          <div class="producto-categoria">Ropa</div>
+          <div class="producto-titulo">Sudadera Universidad - Talla M</div>
+          <div class="producto-footer">
+            <div class="producto-precio">$300</div>
+            <div class="producto-rating">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="producto">
+        <div class="producto-imagen" style="background: linear-gradient(135deg, #b477ec 0%, #764ba2 100%);">
+          <img src="../assets/img/contenedores.png" alt="Contenedores" class="img-producto">
+          <span class="producto-badge trueque">Trueque</span>
+        </div>
+        <div class="producto-info">
+          <div class="producto-categoria">Hogar</div>
+          <div class="producto-titulo">Set de contenedores para comida</div>
+          <div class="producto-footer">
+            <div class="producto-precio" style="color: #4CAF50;">Trueque</div>
+            <div class="producto-rating">
+              ★★★★☆
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/inicio.js"></script>
+  <script>
+    // Animación de entrada para las tarjetas
+    const productos = document.querySelectorAll('.producto, .categoria-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            entry.target.style.transition = 'all 0.5s ease';
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 100);
+        }
+      });
+    });
+
+    productos.forEach(producto => observer.observe(producto));
+
+    // Click en productos
+    document.querySelectorAll('.producto').forEach(producto => {
+      producto.addEventListener('click', () => {
+        console.log('Producto clickeado');
+        // Aquí se puede añadir navegación a detalles
+      });
+    });
+  </script>
+</body>
+</html>
